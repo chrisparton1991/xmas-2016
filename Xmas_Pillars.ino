@@ -1,50 +1,46 @@
 #include <FastLED.h>
 #include "globals.h"
 #include "debug_utils.h"
+#include "colors.h"
 #include "flash_effect.h"
 #include "line_effect.h"
 
-#define LAST_ANIMATION_MS 10000
-
-const CRGBArray<LED_COUNT> leds;
+CRGBArray<LED_COUNT> leds;
 
 void setup() {
   Serial.begin(9600);
   DEBUG_PRINTLN("Initialised Serial.");
 
   FastLED.addLeds<UCS1903B, DATA_PIN, BRG>(leds, LED_COUNT).setCorrection(TypicalSMD5050);
-  blackout();
   DEBUG_PRINTLN("Initialised FastLED.");
 
   DEBUG_PRINTLN("Initialisation complete.");
 }
 
 void loop() {
-  fill_solid(leds, LED_COUNT, CRGB::Black);
+  fill_solid(leds, LED_COUNT, Color::Black);
 
   // Red and green flashes.
-  RUN(flash(1000, 5000, CRGB::Red),  NULL,                             flash(1000, 5000, CRGB::Red),  NULL);
-  RUN(NULL,                          flash(4500, 9500, CRGB::Green),   NULL,                          flash(4500, 9500, CRGB::Green));
-  RUN(flash(9000, 13000, CRGB::Red), NULL,                             flash(9000, 13000, CRGB::Red), NULL);
-  RUN(NULL,                          flash(12500, 16500, CRGB::Green), NULL,                          flash(12500, 16500, CRGB::Green));
+  RUN(flash(1000, 3000, Color::Red), NULL,                            flash(1000, 3000, Color::Red), NULL);
+  RUN(NULL,                          flash(3500, 3000, Color::Green), NULL,                          flash(3500, 3000, Color::Green));
+  RUN(flash(6000, 3000, Color::Red), NULL,                            flash(6000, 3000, Color::Red), NULL);
+  RUN(NULL,                          flash(8500, 3000, Color::Green), NULL,                          flash(8500, 3000, Color::Green));
 
-  
-  RUN(lineUp(18000, 18800, 3, CRGB::Blue), lineUp(18300, 19100, 3, CRGB::Blue), lineUp(18600, 19400, 3, CRGB::Blue), lineUp(18900, 19700, 3, CRGB::Blue))
+  // Fast line ups.
+  RUN(lineUp(13000, 800, 4, Color::Blue),    lineUp(13500, 800, 4, Color::Blue),    lineUp(14000, 800, 4, Color::Blue),    lineUp(14500, 800, 4, Color::LightBlue));
+  RUN(lineUp(14000, 800, 6, Color::Pink),    lineUp(14500, 800, 6, Color::Pink),    lineUp(15000, 800, 6, Color::Pink),    lineUp(15500, 800, 6, Color::Pink));
+  RUN(lineUp(15000, 800, 8, Color::Gold),    lineUp(15500, 800, 8, Color::Gold),    lineUp(16000, 800, 8, Color::Gold),    lineUp(16500, 800, 8, Color::Gold));
+  RUN(lineUp(16000, 800, 10, Color::Purple), lineUp(16500, 800, 10, Color::Purple), lineUp(17000, 800, 10, Color::Purple), lineUp(17500, 800, 10, Color::Purple));
 
-  FastLED.show();
-  checkAnimationCompletion();
-}
+  // Fast line downs.
+  RUN(lineDown(18000, 800, 4, Color::Purple), lineDown(18500, 800, 4, Color::Purple), lineDown(19000, 800, 4, Color::Purple), lineDown(19500, 800, 4, Color::Purple));
+  RUN(lineDown(19000, 800, 6, Color::Gold),   lineDown(19500, 800, 6, Color::Gold),   lineDown(20000, 800, 6, Color::Gold),   lineDown(20500, 800, 6, Color::Gold));
+  RUN(lineDown(20000, 800, 8, Color::Pink),   lineDown(20500, 800, 8, Color::Pink),   lineDown(21000, 800, 8, Color::Pink),   lineDown(21500, 800, 8, Color::Pink));
+  RUN(lineDown(21000, 800, 10, Color::Blue),  lineDown(21500, 800, 10, Color::Blue),  lineDown(22000, 800, 10, Color::Blue),  lineDown(22500, 800, 10, Color::LightBlue));
 
-void checkAnimationCompletion() {
-  if (millis() > LAST_ANIMATION_MS) {
-    blackout();
-    DEBUG_PRINTLN("Animation complete, waiting for power supply restart...");
-    for (;;) {}
-  }
-}
+  // Rainbows.
+  flash(25000, 5000, SpecialColor::Rainbow);
 
-void blackout() {
-  fill_solid(leds, LED_COUNT, CRGB::Black);
   FastLED.show();
 }
 

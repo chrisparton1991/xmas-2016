@@ -8,8 +8,14 @@ String getLedState(int ledCount) {
   String output = "";
   for (int i = 0; i < ledCount; ++i) {
     output += separator;
-    output += leds[i];
-    separator = ',';
+    output += '(';
+    output += leds[i].r;
+    output += ',';
+    output += leds[i].g;
+    output += ',';
+    output += leds[i].b;
+    output += ')';
+    separator = ' ';
   }
 
   return output;

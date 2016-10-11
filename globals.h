@@ -35,6 +35,6 @@
     #error STRIP must be between 1 and 4, inclusive.
 #endif
 
-extern const CRGBArray<LED_COUNT> leds;
+extern CRGBArray<LED_COUNT> leds;
 
 #endif

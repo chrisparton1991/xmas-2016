@@ -6,6 +6,7 @@
 #define DEBUG_ENABLED false
 
 #if DEBUG_ENABLED == true
+  #pragma message "Debug mode is enabled."
   #define DEBUG_PRINT(x) Serial.print(x);
   #define DEBUG_PRINTLN(x) Serial.println(x);
   #define DEBUG_LED_STATE() Serial.println(getLedState(LED_COUNT));

@@ -3,6 +3,6 @@
 
 #include <FastLED.h>
 
-void flash(uint32_t startMs, uint32_t endMs, CRGB color);
+void flash(uint32_t startMs, uint32_t durationMs, CRGB color);
 
 #endif
