@@ -9,13 +9,6 @@ void flash(uint32_t startMs, uint32_t durationMs, CRGB color) {
   CHECK_PROGRESS(progress);
 
   uint8_t darkness = cos8(progress);
-
-  if (color == CRGB(SpecialColor::Rainbow)) {
-    uint8_t darkness = cos8(progress);
-    fill_rainbow(leds, LED_COUNT, progress * 2);
-    leds.fadeToBlackBy(darkness);
-  } else {
-    CRGB adjustedColor = color.fadeToBlackBy(darkness);
-    fill_solid(leds, LED_COUNT, adjustedColor);
-  }
+  fillColor(0, LED_COUNT, progress, color);
+  leds.fadeToBlackBy(darkness);
 }

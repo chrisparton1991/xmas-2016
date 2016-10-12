@@ -1,4 +1,14 @@
 #include <Arduino.h>
+#include "globals.h"
+#include "colors.h"
+
+void fillColor(uint8_t startLed, uint8_t ledCount, int progress, CRGB color) {
+    if (color == CRGB(SpecialColor::Rainbow)) {
+      fill_rainbow(&(leds[startLed]), ledCount, progress * 2);
+    } else {
+      fill_solid(&(leds[startLed]), ledCount, color);
+    }
+}
 
 int getMappedProgress(unsigned long startMs, unsigned long endMs, uint8_t startValue, uint8_t endValue) {
   unsigned long currentMs = millis();
@@ -12,8 +22,4 @@ int getMappedProgress(unsigned long startMs, unsigned long endMs, uint8_t startV
 
 int getProgress(unsigned long startMs, unsigned long endMs) {
   return getMappedProgress(startMs, endMs, 0, 255);
-}
-
-int getProgressPercent(uint32_t startMs, uint32_t endMs) {
-  return getMappedProgress(startMs, endMs, 0, 100);
 }
