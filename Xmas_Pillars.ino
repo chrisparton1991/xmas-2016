@@ -4,6 +4,7 @@
 #include "colors.h"
 #include "flash_effect.h"
 #include "line_effect.h"
+#include "repel_lines_effect.h"
 
 CRGBArray<LED_COUNT> leds;
 
@@ -40,6 +41,8 @@ void loop() {
 
   // Rainbows.
   flash(25000, 5000, SpecialColor::Rainbow);
+  attractLines(31000, 2000, 25, SpecialColor::Rainbow);
+  repelLines(34000, 2000, 25, SpecialColor::Rainbow);
 
   FastLED.show();
 }
