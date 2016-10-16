@@ -44,6 +44,14 @@ void loop() {
   attractLines(31000, 2000, 25, SpecialColor::Rainbow);
   repelLines(34000, 2000, 25, SpecialColor::Rainbow);
 
+  // Consecutive colorful lines.
+  RUN(lineUp(37000, 5000, 10, Color::Red),    lineUp(37000, 5000, 10, Color::Gold),   lineUp(37000, 5000, 10, Color::Purple), lineUp(37000, 5000, 10, Color::Pink));
+  RUN(lineUp(37850, 5000, 10, Color::Green),  lineUp(37850, 5000, 10, Color::Red),    lineUp(37850, 5000, 10, Color::Gold),   lineUp(37850, 5000, 10, Color::Purple));
+  RUN(lineUp(38700, 5000, 10, Color::Blue),   lineUp(38700, 5000, 10, Color::Green),  lineUp(38700, 5000, 10, Color::Red),    lineUp(38700, 5000, 10, Color::Gold));
+  RUN(lineUp(39550, 5000, 10, Color::Pink),   lineUp(39550, 5000, 10, Color::Blue),   lineUp(39550, 5000, 10, Color::Green),  lineUp(39550, 5000, 10, Color::Red));
+  RUN(lineUp(40400, 5000, 10, Color::Purple), lineUp(40400, 5000, 10, Color::Pink),   lineUp(40400, 5000, 10, Color::Blue),   lineUp(40400, 5000, 10, Color::Green));
+  RUN(lineUp(41250, 5000, 50, Color::Gold),   lineUp(41250, 5000, 50, Color::Purple), lineUp(41250, 5000, 50, Color::Pink),   lineUp(41250, 5000, 50, Color::Blue));
+  
   FastLED.show();
 }
 
