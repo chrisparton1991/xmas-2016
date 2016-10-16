@@ -10,8 +10,12 @@ void fillColor(uint8_t startLed, uint8_t ledCount, int progress, CRGB color) {
     }
 }
 
+unsigned long getMillis() {
+  return millis() + START_MILLIS;
+}
+
 int getMappedProgress(unsigned long startMs, unsigned long endMs, uint8_t startValue, uint8_t endValue) {
-  unsigned long currentMs = millis();
+  unsigned long currentMs = getMillis();
 
   if (currentMs < startMs || currentMs > endMs) {
     return -1;

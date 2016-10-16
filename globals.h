@@ -7,6 +7,10 @@
 // This compiles the correct version of the app for each strip.
 #define STRIP 1
 
+// Allows an animation to be started at a certain point.
+// Useful for testing animations, but should be set to 0 for proper builds.
+#define START_MILLIS 0
+
 // LEDS in the strip.
 #define LED_COUNT 50
 
