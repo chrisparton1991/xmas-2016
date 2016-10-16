@@ -51,7 +51,14 @@ void loop() {
   RUN(lineUp(39550, 5000, 10, Color::Pink),   lineUp(39550, 5000, 10, Color::Blue),   lineUp(39550, 5000, 10, Color::Green),  lineUp(39550, 5000, 10, Color::Red));
   RUN(lineUp(40400, 5000, 10, Color::Purple), lineUp(40400, 5000, 10, Color::Pink),   lineUp(40400, 5000, 10, Color::Blue),   lineUp(40400, 5000, 10, Color::Green));
   RUN(lineUp(41250, 5000, 50, Color::Gold),   lineUp(41250, 5000, 50, Color::Purple), lineUp(41250, 5000, 50, Color::Pink),   lineUp(41250, 5000, 50, Color::Blue));
-  
+
+  // Gradient lines.
+  RUN(attractLines(47000, 3000, 50, SpecialColor::RedBlueGradient), repelLines(47000, 3000, 50, SpecialColor::BlueRedGradient),   attractLines(47000, 3000, 50, SpecialColor::RedBlueGradient), repelLines(47000, 3000, 50, SpecialColor::BlueRedGradient));
+  RUN(repelLines(50000, 3000, 50, SpecialColor::BlueRedGradient),   attractLines(50000, 3000, 50, SpecialColor::RedBlueGradient), repelLines(50000, 3000, 50, SpecialColor::BlueRedGradient),   attractLines(50000, 3000, 50, SpecialColor::RedBlueGradient));
+
+  flash(54000, 10000, SpecialColor::RedGoldSparkles);
+  flash(63000, 10000, SpecialColor::BlueGreenSparkles);
+  RUN(lineDown(72000, 10000, 50, SpecialColor::WhiteBlackSparkles), lineUp(72000, 10000, 50, SpecialColor::WhiteBlackSparkles), lineDown(72000, 10000, 50, SpecialColor::WhiteBlackSparkles), lineUp(72000, 10000, 50, SpecialColor::WhiteBlackSparkles));
   FastLED.show();
 }
 
