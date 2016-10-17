@@ -20,8 +20,8 @@ const uint32_t SPARKLE_PATTERNS[SPARKLE_PATTERN_COUNT] = {
   0b00100100001010001001000100100010
 };
 
-bool isNormalColor(uint32_t color) {
-  return color < SPECIAL_COLOR_RANGE_START && color > SPECIAL_COLOR_RANGE_END;
+bool isSpecialColor(CRGB color) {
+  return color.r == 0 && color.g == 0 && color.b > 0 && color.b < 0x50;
 }
 
 void fillSparkle(uint8_t startLed, uint8_t ledCount, int progress, CRGB backgroundColor, CRGB sparkleColor) {
@@ -38,7 +38,7 @@ void fillSparkle(uint8_t startLed, uint8_t ledCount, int progress, CRGB backgrou
 }
 
 void fillColor(uint8_t startLed, uint8_t ledCount, int progress, CRGB color) {
-    if (isNormalColor(color)) {
+    if (!isSpecialColor(color)) {
       fill_solid(&(leds[startLed]), ledCount, color); 
     } else if (color == CRGB(SpecialColor::Rainbow)) {
       fill_rainbow(&(leds[startLed]), ledCount, progress * 2);
@@ -52,6 +52,8 @@ void fillColor(uint8_t startLed, uint8_t ledCount, int progress, CRGB color) {
       fillSparkle(startLed, ledCount, progress, Color::Blue, Color::Green);
     } else if (color == CRGB(SpecialColor::WhiteBlackSparkles)) {
       fillSparkle(startLed, ledCount, progress, Color::White, Color::Black);
+    } else if (color == CRGB(SpecialColor::YellowPurpleSparkles)) {
+      fillSparkle(startLed, ledCount, progress, Color::Yellow, Color::Purple);
     }
 }
 
