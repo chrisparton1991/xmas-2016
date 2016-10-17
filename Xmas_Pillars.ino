@@ -5,6 +5,7 @@
 #include "flash_effect.h"
 #include "line_effect.h"
 #include "repel_lines_effect.h"
+#include "build_effect.h"
 
 CRGBArray<LED_COUNT> leds;
 
@@ -59,6 +60,13 @@ void loop() {
   flash(54000, 10000, SpecialColor::RedGoldSparkles);
   flash(63000, 10000, SpecialColor::BlueGreenSparkles);
   RUN(lineDown(72000, 10000, 50, SpecialColor::WhiteBlackSparkles), lineUp(72000, 10000, 50, SpecialColor::WhiteBlackSparkles), lineDown(72000, 10000, 50, SpecialColor::WhiteBlackSparkles), lineUp(72000, 10000, 50, SpecialColor::WhiteBlackSparkles));
+
+  buildUp(83000, 10000, 10, SpecialColor::Rainbow);
+  unbuildUp(93000, 10000, 10, SpecialColor::Rainbow);
+
+  RUN(buildDown(104000, 10000, 10, SpecialColor::RedGoldSparkles),   buildUp(104000, 10000, 10, SpecialColor::BlueGreenSparkles),   buildDown(104000, 10000, 10, SpecialColor::WhiteBlackSparkles),   buildUp(104000, 10000, 10, SpecialColor::YellowPurpleSparkles));
+  RUN(unbuildDown(114000, 10000, 10, SpecialColor::RedGoldSparkles), unbuildUp(114000, 10000, 10, SpecialColor::BlueGreenSparkles), unbuildDown(114000, 10000, 10, SpecialColor::WhiteBlackSparkles), unbuildUp(114000, 10000, 10, SpecialColor::YellowPurpleSparkles));
+
   FastLED.show();
 }
 

@@ -27,7 +27,8 @@ typedef enum {
   RedBlueGradient = 0x000003,
   RedGoldSparkles = 0x000004,
   BlueGreenSparkles = 0x000005,
-  WhiteBlackSparkles = 0x000006
+  WhiteBlackSparkles = 0x000006,
+  YellowPurpleSparkles = 0x000007,
 } SpecialColor;
 
 #endif
