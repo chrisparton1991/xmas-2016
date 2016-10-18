@@ -58,7 +58,13 @@ void fillColor(uint8_t startLed, uint8_t ledCount, int progress, CRGB color) {
 }
 
 unsigned long getMillis() {
-  return millis() + START_MILLIS;
+  unsigned long elapsedMs = millis();
+
+  // Per-Arduino adjustment to compensate for variation in clock frequencies.
+  if (TIME_CORRECTION_MS != 0) {
+    elapsedMs += elapsedMs / TIME_CORRECTION_MS;
+  }
+  return elapsedMs + START_MILLIS;
 }
 
 int getMappedProgress(unsigned long startMs, unsigned long endMs, uint8_t startValue, uint8_t endValue) {
