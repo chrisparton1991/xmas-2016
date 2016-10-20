@@ -57,8 +57,8 @@ void fillColor(uint8_t startLed, uint8_t ledCount, int progress, CRGB color) {
     }
 }
 
-unsigned long getMillis() {
-  unsigned long elapsedMs = millis();
+uint32_t getMillis() {
+  uint32_t elapsedMs = millis();
 
   // Per-Arduino adjustment to compensate for variation in clock frequencies.
   if (TIME_CORRECTION_MS != 0) {

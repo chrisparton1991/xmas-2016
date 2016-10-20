@@ -2,6 +2,8 @@
 #include "globals.h"
 #include "debug_utils.h"
 #include "colors.h"
+#include "effect_utils.h"
+#include "fill_effect.h"
 #include "flash_effect.h"
 #include "line_effect.h"
 #include "repel_lines_effect.h"
@@ -16,6 +18,8 @@ void setup() {
   FastLED.addLeds<UCS1903B, DATA_PIN, BRG>(leds, LED_COUNT).setCorrection(TypicalSMD5050);
   DEBUG_PRINTLN("Initialised FastLED.");
 
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, LOW);
   DEBUG_PRINTLN("Initialisation complete.");
 }
 
@@ -61,12 +65,25 @@ void loop() {
   flash(63000, 10000, SpecialColor::BlueGreenSparkles);
   RUN(lineDown(72000, 10000, 50, SpecialColor::WhiteBlackSparkles), lineUp(72000, 10000, 50, SpecialColor::WhiteBlackSparkles), lineDown(72000, 10000, 50, SpecialColor::WhiteBlackSparkles), lineUp(72000, 10000, 50, SpecialColor::WhiteBlackSparkles));
 
-  buildUp(83000, 10000, 10, SpecialColor::Rainbow);
-  unbuildUp(93000, 10000, 10, SpecialColor::Rainbow);
+  RUN(buildUp(83000, 5000, 5, Color::Red),   buildUp(83000, 5000, 5, Color::Green),   buildUp(83000, 5000, 5, Color::Blue),   buildUp(83000, 5000, 5, Color::Gold));
+  RUN(fill(88000, 2000, Color::Red),         fill(88000, 2000, Color::Green),         fill(88000, 2000, Color::Blue),         fill(88000, 2000, Color::Gold));
+  RUN(unbuildUp(90000, 5000, 5, Color::Red), unbuildUp(90000, 5000, 5, Color::Green), unbuildUp(90000, 5000, 5, Color::Blue), unbuildUp(90000, 5000, 5, Color::Gold));
 
-  RUN(buildDown(104000, 10000, 10, SpecialColor::RedGoldSparkles),   buildUp(104000, 10000, 10, SpecialColor::BlueGreenSparkles),   buildDown(104000, 10000, 10, SpecialColor::WhiteBlackSparkles),   buildUp(104000, 10000, 10, SpecialColor::YellowPurpleSparkles));
-  RUN(unbuildDown(114000, 10000, 10, SpecialColor::RedGoldSparkles), unbuildUp(114000, 10000, 10, SpecialColor::BlueGreenSparkles), unbuildDown(114000, 10000, 10, SpecialColor::WhiteBlackSparkles), unbuildUp(114000, 10000, 10, SpecialColor::YellowPurpleSparkles));
+  buildUp(96000, 10000, 10, SpecialColor::Rainbow);
+  unbuildDown(106000, 10000, 10, SpecialColor::Rainbow);
+
+  RUN(buildDown(117000, 10000, 10, SpecialColor::RedGoldSparkles),   buildUp(117000, 10000, 10, SpecialColor::BlueGreenSparkles),   buildDown(117000, 10000, 10, SpecialColor::WhiteBlackSparkles),   buildUp(117000, 10000, 10, SpecialColor::YellowPurpleSparkles));
+  RUN(unbuildDown(127000, 10000, 10, SpecialColor::RedGoldSparkles), unbuildUp(127000, 10000, 10, SpecialColor::BlueGreenSparkles), unbuildDown(127000, 10000, 10, SpecialColor::WhiteBlackSparkles), unbuildUp(127000, 10000, 10, SpecialColor::YellowPurpleSparkles));
 
   FastLED.show();
+  endAnimation(138000);
+}
+
+// Wait for PSU reset.
+void endAnimation(uint32_t endMs) {
+  while (getMillis() >= endMs) {
+    digitalWrite(LED_PIN, HIGH);
+    delay(1000);
+  }
 }
 

@@ -7,6 +7,11 @@
 #define CHECK_PROGRESS(progress) if (progress == -1) { return; }
 
 /**
+ * Returns the milliseconds elapsed since startup, taking into consideration the specified TIME_CORRECTION_MS.
+ */
+uint32_t getMillis();
+
+/**
  * Fills the specified LEDS with the specified color (or special color effect).
  */
 void fillColor(uint8_t startLed, uint8_t ledCount, int progress, CRGB color);
