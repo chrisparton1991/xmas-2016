@@ -62,7 +62,7 @@ uint32_t getMillis() {
 
   // Per-Arduino adjustment to compensate for variation in clock frequencies.
   if (TIME_CORRECTION_MS != 0) {
-    elapsedMs += elapsedMs / TIME_CORRECTION_MS;
+    elapsedMs += (elapsedMs / TIME_CORRECTION_MS) * TIME_CORRECTION_FACTOR;
   }
   return elapsedMs + START_MILLIS;
 }

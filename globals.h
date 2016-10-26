@@ -29,15 +29,19 @@
 #if STRIP == 1
     #define RUN(A, B, C, D) A
     #define TIME_CORRECTION_MS 505
+    #define TIME_CORRECTION_FACTOR 1
 #elif STRIP == 2
     #define RUN(A, B, C, D) B
-    #define TIME_CORRECTION_MS 180000
+    #define TIME_CORRECTION_MS 300
+    #define TIME_CORRECTION_FACTOR 1
 #elif STRIP == 3
     #define RUN(A, B, C, D) C
     #define TIME_CORRECTION_MS 325
+    #define TIME_CORRECTION_FACTOR 1
 #elif STRIP == 4
     #define RUN(A, B, C, D) D
     #define TIME_CORRECTION_MS 555
+    #define TIME_CORRECTION_FACTOR 1
 #else
     #error STRIP must be between 1 and 4, inclusive.
 #endif
